@@ -1,0 +1,33 @@
+{
+  "name": "818-express-auth",
+  "version": "1.0.0",
+  "description": "* create a node app\r * .gitignore\r * install and set up express\r * stubbed out GET auth/login, GET auth/signup, POST auth/login, POST auth/signup\r * configured auth controller\r * set up ejs, express-ejs-layouts, verified that it's working\r * set up the signup and login forms, tested post routes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pg": "^8.4.2",
+    "sequelize": "^6.3.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NatrezC/818-express-auth.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NatrezC/818-express-auth/issues"
+  },
+  "homepage": "https://github.com/NatrezC/818-express-auth#readme"
+}
