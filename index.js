@@ -6,6 +6,8 @@ const session = require('express-session')
 const passport = require('./config/ppConfig.js')
 const flash = require('connect-flash')
 const isLoggedIn = require('./middleware/isLoggedIn')
+const main = require('./controllers/main')
+
 
 //  setup ejs and ejs layouts
 app.set('view engine', 'ejs')
@@ -48,6 +50,8 @@ app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
 
+app.use('/dinosaurs', main)
+
 app.listen(process.env.PORT, ()=>{
-    console.log('you\'re listening to the spooky sounds of port 8000')
+    console.log(`you're listening to the spooky sounds of port ${process.env.PORT}`)
 })

@@ -13,11 +13,11 @@
 
 2. Install dependencies ---> npm i
 
-3. Creae a `config.json` with the following code:
+3. Create a `config.json` with the following code:
 {
   "development": {
     "username": "postgres",
-    "password": "Tdadon96",
+    "password": "",
     "database": "db name",
     "host": "127.0.0.1",
     "dialect": "postgres"
