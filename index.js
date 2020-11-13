@@ -46,6 +46,8 @@ app.use((req, res, next)=>{
 // use controllers
 app.use('/auth', require('./controllers/auth.js'))
 
+app.use(express.static(__dirname + '/public'))
+
 app.get('/', (req, res)=>{
     res.render('home')
 })
