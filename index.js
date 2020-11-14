@@ -10,8 +10,13 @@ const main = require('./controllers/main')
 const fsExtra = require('fs-extra')
 const fs = require('fs')
 const path = require('path')
-const img = fs.readFileSync(path.join(__dirname, '../Doggy-IG2/images/example.jpg'))
-const cloudinary = require('cloudinary').v2;
+// const img = fs.readFileSync(path.join(__dirname, '../Doggy-IG2/images/example.jpg'))
+const cloudinary = require('cloudinary')
+const multer = require('multer')
+const upload = multer({ dest: './uploads/' }).single('myFile')
+var uploadFile = require("express-fileupload");
+let imgUrl = cloudinary.url('ivxhhdczxofx3rtze0cg', {width: 250, height: 250})
+cloudinary.config(process.env.CLOUDINARY_URL)
 
 //  setup ejs and ejs layouts
 app.set('view engine', 'ejs')
@@ -46,22 +51,51 @@ app.use((req, res, next)=>{
 // use controllers
 app.use('/auth', require('./controllers/auth.js'))
 
+// use for styling
 app.use(express.static(__dirname + '/public'))
+app.use(express.static('public'))
 
 app.get('/', (req, res)=>{
     res.render('home')
+})
+
+app.get('/post', isLoggedIn, (req, res) => {
+    res.render('post')
 })
 
 app.get('/profile', isLoggedIn, (req, res)=>{
     res.render('profile')
 })
 
-app.get('/upload', (req, res) => {
-    const img = fs.readFileSync(path.join(__dirname, './images/example.jpg'))
-    cloudinary.v2.uploader.upload(img, option, (err, { url }) => {
-        console.log({ url })
+app.post('/upload', upload, function (req, res) {
+    cloudinary.uploader.upload(req.file.path, function (result) {
+        // res.send(result.url);
+        imgUrl = result.url
+        console.log(req.file)
+        console.log(req.body)
+        db.post.create({
+            title: req.body.title,
+            date: req.body.date,
+            url: imgUrl,
+            categoryId: req.body.category,
+            userId: req.user.id
+        }).then((mail) => {
+            console.log('🧽')
+            console.log(mail.get())
+            res.render('profile', { mail: mail })
+        }).catch(err => {
+            console.log('🛎', err)
+        })
     })
 })
+
+// app.post('/upload', upload.single('myFile'), (req, res) => {
+//     //const img = fs.readFileSync(path.join(__dirname, './images/example.jpg'))
+
+//     cloudinary.uploader.upload(img, option, (err, { url }) => {
+//         console.log({ url })
+//     })
+// })
 
 app.listen(process.env.PORT, ()=>{
     console.log(`you're listening to the spooky sounds of port ${process.env.PORT}`)

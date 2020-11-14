@@ -1,13 +1,28 @@
 <h2>Signup</h2>
-<form method="POST" action="/auth/signup">
-    <label for="new-name">Name</label>
-    <input type="text" name="name" id="new-name">
 
-    <label for="new-email">Email</label>
-    <input type="email" name="email" id="new-email">
-
-    <label for="new-password">Password</label>
-    <input type="password" name="password" id="new-password">
-
-    <input type="submit" value="Sign Up">
-</form>
+<section class="container-fluid bg">
+    <section class="row justify-content-center">
+        <section class="col-12 col-sm-6 col-md-3">
+            <form class="form-container" method="POST" action="/auth/signup">
+                <form>
+                    <div class="form-group">
+                        <label for="new-name">Name</label>
+                        <input type="text" name="name" id="new-name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-email">Email address</label>
+                        <input type="email" class="form-control" id="new-email" name="email"
+                            aria-describedby="emailHelp">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Password</label>
+                        <input type="password" class="form-control" id="new-password" name="password">
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-block"></input>
+                </form>
+            </form>
+        </section>
+    </section>
+</section>
